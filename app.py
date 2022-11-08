@@ -7,7 +7,7 @@ import websockets
 import secrets
 
 import os
-from dotenv import load_dotenv
+#from dotenv import load_dotenv
 import signal
 
 from connect4 import PLAYER1, PLAYER2, Connect4
@@ -15,10 +15,10 @@ from connect4 import PLAYER1, PLAYER2, Connect4
 JOIN = {}
 WATCH = {}
 
-load_dotenv()
-PROJECT_ID = os.getenv('PROJECT_ID')
-WEBSOCKET_PORT = os.getenv('WEBSOCKET_PORT')
-WEBSOCKET_SERVE_IP = os.getenv('WEBSOCKET_SERVE_IP')
+#load_dotenv()
+#PROJECT_ID = os.getenv('PROJECT_ID')
+#WEBSOCKET_PORT = os.getenv('WEBSOCKET_PORT')
+#WEBSOCKET_SERVE_IP = os.getenv('WEBSOCKET_SERVE_IP')
 
 async def error(websocket, message):
     event = {
