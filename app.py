@@ -174,8 +174,20 @@ async def handler(websocket):
         await start(websocket)
 
 async def main():
+    '''
+    #LOCAL MODE
     async with websockets.serve(handler, WEBSOCKET_SERVE_IP, WEBSOCKET_PORT):
         await asyncio.Future()  # run forever
+    '''
+    #Heroku Mode
+    # Set the stop condition when receiving SIGTERM.
+    loop = asyncio.get_running_loop()
+    stop = loop.create_future()
+    loop.add_signal_handler(signal.SIGTERM, stop.set_result, None)
+
+    port = int(os.environ.get("PORT", "8001"))
+    async with websockets.serve(handler, "", port):
+        await stop
 
 
 if __name__ == "__main__":
