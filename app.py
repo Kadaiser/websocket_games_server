@@ -7,18 +7,19 @@ import websockets
 import secrets
 
 import os
-#from dotenv import load_dotenv
 import signal
 
 from connect4 import PLAYER1, PLAYER2, Connect4
+'''
+from dotenv import load_dotenv
+load_dotenv()
+PROJECT_ID = os.getenv('PROJECT_ID')
+WEBSOCKET_PORT = os.getenv('WEBSOCKET_PORT')
+WEBSOCKET_SERVE_IP = os.getenv('WEBSOCKET_SERVE_IP')
+'''
 
 JOIN = {}
 WATCH = {}
-
-#load_dotenv()
-#PROJECT_ID = os.getenv('PROJECT_ID')
-#WEBSOCKET_PORT = os.getenv('WEBSOCKET_PORT')
-#WEBSOCKET_SERVE_IP = os.getenv('WEBSOCKET_SERVE_IP')
 
 async def error(websocket, message):
     event = {
@@ -174,9 +175,10 @@ async def handler(websocket):
         await start(websocket)
 
 async def main():
-    '''
+    
     #LOCAL MODE
-    async with websockets.serve(handler, WEBSOCKET_SERVE_IP, WEBSOCKET_PORT):
+    '''
+    async with websockets.serve(handler, "0.0.0.0", 8001):
         await asyncio.Future()  # run forever
     '''
     #Heroku Mode
@@ -188,7 +190,6 @@ async def main():
     port = int(os.environ.get("PORT", "8001"))
     async with websockets.serve(handler, "", port):
         await stop
-
 
 if __name__ == "__main__":
     asyncio.run(main())

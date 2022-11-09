@@ -12,10 +12,13 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 function getWebSocketServer() {
-    if (window.location.host === "aaugustin.github.io") {
+    console.log(window.location.host);
+    if (window.location.host === "www.mundotsg.com" || window.location.host === "mundotsg.com") {
       return "wss://websockets-games-server.herokuapp.com/";
+    } else if (window.location.host === "188.78.4.237:8000") {
+      return "ws://188.78.4.237:8001/";
     } else if (window.location.host === "192.168.1.20:8000") {
-      return "ws://192.168.1.20:8001/";
+        return "ws://192.168.1.20:8001/";
     } else {
       throw new Error(`Unsupported host: ${window.location.host}`);
     }
